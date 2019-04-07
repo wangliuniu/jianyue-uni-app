@@ -1,0 +1,25 @@
+*{
+	font-size: 14pt;
+}
+.container {
+	width: 95%;
+	margin: 0 auto;
+}
+.avatar {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+}
+.list {
+	display: flex;
+	flex-direction: column;
+}
+.list-item {
+	width: 100%;
+	height: 70px;
+	display: flex;
+	background-color: #fff;
+	align-items: center;
+	border-bottom: 1px solid #eee;
+	font-size: 20px;
+}

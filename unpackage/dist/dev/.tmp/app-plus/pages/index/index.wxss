@@ -1,0 +1,82 @@
+
+page {
+	background: #FFFFFF;
+}
+/* 选项卡 */
+.tab{padding:0;}
+/* 导航栏整体设置 */
+.tab-title {white-space:nowrap; /* text-align:center; */}
+/* 导航栏文字梳理 */
+.tab-title view{width:auto; padding:0 8px; margin:0 8px; line-height:42px; display: inline-block; text-align:center;font-size:40rpx;}
+/* .tab-title view:first-child{margin-left: 0;}
+.tab-title view:last-child{margin-right: 0;} */
+/* 导航栏底部下划线设置 */
+.tab-current{border-bottom:4rpx solid #00C777 !important; color:#00C777;}
+.tab-swiper{width:100%; height:350rpx; padding:0;}
+.tab-swiper swiper-item{width:100%;}
+.tab-swiper swiper-item navigator{line-height:70rpx; width:100%; display:block;}
+.tab-swiper-full{width:100%; height:auto;}
+.tab-swiper-full swiper-item{width:100%;}
+.tab-swiper-full scroll-view{width:100%; height:100%;}
+.content {text-align: center;height: 400rpx;}
+.title{
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	margin-top: 50rpx;
+}
+.hr1{
+	width: 100%;
+	height: 0.5px;
+	margin-top: 5rpx;
+	background: #bfbfbf;
+}
+.bigcard {
+	width: 100%;
+	height: 600px;
+	margin: 0 auto;
+	background-color: white;
+	border-color: #A9A9A9;
+}
+.card {
+	text-align: left;
+	margin-left: 10px;
+	margin-right: 10px;
+	font-size: 14px;
+	line-height: 20px;
+   	border: #B4B4B4  1rpx solid;
+   border-left: 0px;
+   border-right: 0px;
+   border-top: 0px;
+   height: 100px;
+   padding-top: 10px;
+}
+.touxiang {
+	width: 30px;
+	height: 30px;
+	float: left;
+	margin-left: 5px;
+	border-radius: 30px;
+	marker-end: 5px;
+}
+.name{
+	color: #B4B4B4;
+	margin-left: 5px;
+}
+.word{
+	color: #B4B4B4;
+	margin-left: 10px;
+	margin-bottom: 1px;
+}
+.title{
+	font-size: 20px;
+	margin-left: 10px;
+}
+.card1{
+	margin-left: 10px;
+	-webkit-align-content: center;
+	    -ms-flex-line-pack: center;
+	        align-content: center;
+}
+
