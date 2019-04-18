@@ -12,9 +12,9 @@
 				<view class="right">{{ nickname }}</view>
 			</view>
 			<view class="list-item list-item-heigher">
-				<view class="left"><input type="text" v-model="newNickname" /></view>
+				<view class="right1"><input type="text" v-model="newNickname" /></view>
 				<view class="left">
-					<button @tap="uploadNickname">确定</button>
+					<button @tap="uploadNickname" class="green-btn">确定</button>
 				</view>
 			</view>
 		</view>
@@ -29,6 +29,11 @@ export default {
 			avatar: uni.getStorageSync('login_key').avatar,
 			userId: uni.getStorageSync('login_key').userId
 		};
+	},
+	onLoad() {
+		uni.setNavigationBarTitle({
+			title: '修改资料'
+		});
 	},
 	methods: {
 		uploadNickname: function() {
@@ -198,8 +203,24 @@ export default {
 }
 .left {
 	flex: 1 1 30%;
+	font-size: 17px;
+	color: #DE533A;
 }
 .right {
 	flex: 1 1 70%;
+	font-size: 17px;
 }
+.right1{
+	flex: 1 1 30%;
+	font-size: 17px;
+}
+.green-btn{
+	 
+	
+	
+	 background:  #DE533A;
+	 color:white ;
+	 border-color:#B4B4B4;
+	 
+ }
 </style>

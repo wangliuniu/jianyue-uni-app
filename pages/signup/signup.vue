@@ -125,4 +125,13 @@ input {
 	height: 40px;
 	font-size: 14px;
 }
+.green-btn{
+	 
+	
+	
+	 background:  #DE533A;
+	 color:white ;
+	 border-color:#B4B4B4;
+	 
+ }
 </style>

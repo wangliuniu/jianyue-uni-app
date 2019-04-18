@@ -130,34 +130,61 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
 {
   data: function data() {
     return {
-      nickname: '',
-      avatar: '',
+      nickname: uni.getStorageSync('login_key').nickname,
+      avatar: uni.getStorageSync('login_key').avatar,
       userId: uni.getStorageSync('login_key').userId };
 
   },
-  onLoad: function onLoad() {
-  },
-  onShow: function onShow() {
-    var _this = this;
-    uni.request({
-      url: 'http://47.101.136.225:8080/api/user/' + uni.getStorageSync('login_key').userId,
-      method: 'GET',
-      header: { 'content-type': 'application/json' },
-      success: function success(res) {
-        if (res.data.code === 0) {
-          console.log(res.data.data.avatar + '————————————');
-          _this.avatar = res.data.data.avatar;
-          _this.nickname = res.data.data.nickname;
-        }
-      } });
-
-  },
   methods: {
+    uploadNickname: function uploadNickname() {var _this2 = this;
+      var _this = this;
+      uni.request({
+        url: this.apiServer + '/user/nickname',
+        method: 'post',
+        header: { 'content-type': 'application/x-www-form-urlencoded' },
+        data: {
+          userId: _this.userId,
+          nickname: _this.newNickname },
+
+        success: function success(uploadNickname) {
+          console.log(uploadNickname.data);
+          _this.nickname = _this.newNickname;
+          uni.request({
+            url: _this2.apiServer + '/user/' + uni.getStorageSync('login_key').userId,
+            method: 'GET',
+            data: {
+              userId: _this.userId },
+
+            header: {
+              'content-type': 'application/json' },
+
+            success: function success(res) {
+              if (res.data.code == 0) {
+                //将用户数据记录在本地存储
+                uni.setStorageSync('login_key', {
+                  userId: res.data.data.id,
+                  nickname: res.data.data.nickname,
+                  avatar: res.data.data.avatar,
+                  token: res.data.data.token,
+                  login: true });
+
+              }
+            } });
+
+        } });
+
+    },
     showActionSheet: function showActionSheet() {
-      console.log('show');
       var _this = this;
       uni.showActionSheet({
         itemList: ['拍照', '从相册选择'],
@@ -174,7 +201,7 @@ __webpack_require__.r(__webpack_exports__);
                   success: function success() {
                     console.log('save success');
                     uni.uploadFile({
-                      url: 'http://47.101.136.225:8080/api/user/avatar', //仅为示例，非真实的接口地址
+                      url: 'http://192.168.43.99:8080/api/user/avatar',
                       filePath: res.tempFilePaths[0],
                       name: 'file',
                       formData: {
@@ -183,6 +210,34 @@ __webpack_require__.r(__webpack_exports__);
                       success: function success(uploadFileRes) {
                         console.log(uploadFileRes.data);
                         _this.avatar = uploadFileRes.data;
+                      },
+                      complete: function complete() {
+                        console.log('save');
+                        uni.request({
+                          url:
+                          'http://192.168.43.99:8080/api/user/' +
+                          uni.getStorageSync('login_key').userId,
+                          method: 'GET',
+                          data: {
+                            userId: _this.userId },
+
+                          header: {
+                            'content-type': 'application/json' },
+
+                          success: function success(res) {
+                            console.log('save2');
+                            if (res.data.code == 0) {
+                              //将用户数据记录在本地存储
+                              uni.setStorageSync('login_key', {
+                                userId: res.data.data.id,
+                                nickname: res.data.data.nickname,
+                                avatar: res.data.data.avatar,
+                                token: res.data.data.token,
+                                login: true });
+
+                            }
+                          } });
+
                       } });
 
                   } });
@@ -199,7 +254,7 @@ __webpack_require__.r(__webpack_exports__);
               success: function success(res) {
                 console.log(JSON.stringify(res.tempFilePaths));
                 uni.uploadFile({
-                  url: 'http://39.96.182.225:8080/api/user/avatar', //仅为示例，非真实的接口地址
+                  url: ' http://192.168.43.99:8080/api/user/avatar',
                   filePath: res.tempFilePaths[0],
                   name: 'file',
                   formData: {
@@ -208,6 +263,34 @@ __webpack_require__.r(__webpack_exports__);
                   success: function success(uploadFileRes) {
                     console.log(uploadFileRes.data);
                     _this.avatar = uploadFileRes.data;
+                  },
+                  complete: function complete() {
+                    console.log('save');
+                    uni.request({
+                      url:
+                      'http://192.168.43.99:8080/api/user/' +
+                      uni.getStorageSync('login_key').userId,
+                      method: 'GET',
+                      data: {
+                        userId: _this.userId },
+
+                      header: {
+                        'content-type': 'application/json' },
+
+                      success: function success(res) {
+                        console.log('save2');
+                        if (res.data.code == 0) {
+                          //将用户数据记录在本地存储
+                          uni.setStorageSync('login_key', {
+                            userId: res.data.data.id,
+                            nickname: res.data.data.nickname,
+                            avatar: res.data.data.avatar,
+                            token: res.data.data.token,
+                            login: true });
+
+                        }
+                      } });
+
                   } });
 
               } });
@@ -252,10 +335,6 @@ var render = function() {
   return _c("view", { staticClass: "container" }, [
     _c("view", { staticClass: "list" }, [
       _c("view", { staticClass: "list-item list-item-heigher" }, [
-        _c("view", { staticClass: "left" }, [_vm._v("昵称")]),
-        _c("view", { staticClass: "right" }, [_vm._v(_vm._s(_vm.nickname))])
-      ]),
-      _c("view", { staticClass: "list-item list-item-heigher" }, [
         _c("view", { staticClass: "left" }, [_vm._v("头像")]),
         _c("view", { staticClass: "right" }, [
           _c("image", {
@@ -265,20 +344,53 @@ var render = function() {
           })
         ])
       ]),
-      _vm._m(0)
+      _c("view", { staticClass: "list-item list-item-heigher" }, [
+        _c("view", { staticClass: "left" }, [_vm._v("昵称")]),
+        _c("view", { staticClass: "right" }, [_vm._v(_vm._s(_vm.nickname))])
+      ]),
+      _c("view", { staticClass: "list-item list-item-heigher" }, [
+        _c("view", { staticClass: "left" }, [
+          _c("input", {
+            directives: [
+              {
+                name: "model",
+                rawName: "v-model",
+                value: _vm.newNickname,
+                expression: "newNickname"
+              }
+            ],
+            attrs: { type: "text", eventid: "52973665-1" },
+            domProps: { value: _vm.newNickname },
+            on: {
+              input: function($event) {
+                if ($event.target.composing) {
+                  return
+                }
+                _vm.newNickname = $event.target.value
+              }
+            }
+          })
+        ]),
+        _c(
+          "view",
+          { staticClass: "left" },
+          [
+            _c(
+              "button",
+              {
+                attrs: { eventid: "52973665-2" },
+                on: { tap: _vm.uploadNickname }
+              },
+              [_vm._v("确定")]
+            )
+          ],
+          1
+        )
+      ])
     ])
   ])
 }
-var staticRenderFns = [
-  function() {
-    var _vm = this
-    var _h = _vm.$createElement
-    var _c = _vm._self._c || _h
-    return _c("view", { staticClass: "list-item list-item-heigher" }, [
-      _c("view", { staticClass: "left" }, [_vm._v("修改密码")])
-    ])
-  }
-]
+var staticRenderFns = []
 render._withStripped = true
 
 

@@ -5,6 +5,7 @@
     "pages/my/my",
     "pages/password/password",
     "pages/signup/signup",
+    "pages/article_detail/article_detail",
     "pages/signin/signin",
     "pages/write/write",
     "pages/info/info",

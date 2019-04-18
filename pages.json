@@ -35,6 +35,12 @@
 			}
 		},
 		{
+			"path": "pages/article_detail/article_detail",
+			"style": {
+				"navigationBarTitleText": "文章详情"
+			}
+		},
+		{
 			"path": "pages/signin/signin",
 		"navigationBarTitleText": ""
 		},
@@ -55,6 +61,7 @@
 			"navigationBarTitleText": "个人资料"
 
 		}
+		
 	],
 	"globalStyle": {
 		"navigationBarTextStyle": "black",

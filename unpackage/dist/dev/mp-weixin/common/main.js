@@ -82,7 +82,7 @@ __webpack_require__.r(__webpack_exports__);
 __webpack_require__(/*! uni-pages */ "../../../../VueStudy/jianyue-uni-app/pages.json");
 var _vue = _interopRequireDefault(__webpack_require__(/*! vue */ "./node_modules/@dcloudio/vue-cli-plugin-uni/packages/mpvue/index.js"));
 var _App = _interopRequireDefault(__webpack_require__(/*! ./App */ "../../../../VueStudy/jianyue-uni-app/App.vue"));function _interopRequireDefault(obj) {return obj && obj.__esModule ? obj : { default: obj };}function _objectSpread(target) {for (var i = 1; i < arguments.length; i++) {var source = arguments[i] != null ? arguments[i] : {};var ownKeys = Object.keys(source);if (typeof Object.getOwnPropertySymbols === 'function') {ownKeys = ownKeys.concat(Object.getOwnPropertySymbols(source).filter(function (sym) {return Object.getOwnPropertyDescriptor(source, sym).enumerable;}));}ownKeys.forEach(function (key) {_defineProperty(target, key, source[key]);});}return target;}function _defineProperty(obj, key, value) {if (key in obj) {Object.defineProperty(obj, key, { value: value, enumerable: true, configurable: true, writable: true });} else {obj[key] = value;}return obj;}
-
+_vue.default.prototype.apiServer = 'http://192.168.43.99:8080/api';
 _vue.default.config.productionTip = false;
 
 _App.default.mpType = 'app';
@@ -91,7 +91,6 @@ var app = new _vue.default(_objectSpread({},
 _App.default));
 
 app.$mount();
-_vue.default.prototype.apiServer = 'http://47.101.136.225:8080/api';
 
 /***/ }),
 

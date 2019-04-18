@@ -125,17 +125,35 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
+
+
+
+
+
+
+
+
+
+
+
+
+
+
 {
   data: function data() {
     return {
       mobile: '',
-      verifyCode: '' };
+      verifyCode: '',
+      timer: 20,
+      show: false,
+      title: '获取验证码' };
 
   },
-  onLoad: function onLoad() {uni.setNavigationBarTitle({
+  onLoad: function onLoad() {
+    uni.setNavigationBarTitle({
       title: '注册' });
-  },
 
+  },
   methods: {
     getVerifyCode: function getVerifyCode() {
       var _this = this;
@@ -153,6 +171,18 @@ __webpack_require__.r(__webpack_exports__);
 
             _this.disabled = true;
             console.log(_this.disabled);
+            var timer1 = setInterval(function () {
+              _this.show = true;
+              _this.timer--;
+              _this.title = _this.timer + 's后再试';
+              if (_this.timer == 0) {
+                clearInterval(timer1);
+                _this.timer = 20;
+                _this.show = false;
+                _this.title = '发送验证码';
+                return;
+              }
+            }, 1000);
           } else {
             uni.showModal({
               title: '提示',
@@ -256,10 +286,10 @@ var render = function() {
             "button",
             {
               staticClass: "green-btn small-btn right",
-              attrs: { eventid: "16a7f191-1" },
+              attrs: { disabled: _vm.show, eventid: "16a7f191-1" },
               on: { tap: _vm.getVerifyCode }
             },
-            [_vm._v("获取验证码")]
+            [_vm._v(_vm._s(_vm.title))]
           )
         ],
         1

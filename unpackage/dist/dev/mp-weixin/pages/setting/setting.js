@@ -128,9 +128,6 @@ __webpack_require__.r(__webpack_exports__);
 
 
 
-
-
-
 {
   data: function data() {
     return {};
@@ -192,20 +189,13 @@ var render = function() {
           ])
         ]),
         _c(
-          "view",
-          { staticClass: "list-item" },
-          [
-            _c(
-              "button",
-              {
-                staticClass: "btn",
-                attrs: { eventid: "5cdcb69a-0" },
-                on: { tap: _vm.logout }
-              },
-              [_vm._v("退出当前账号")]
-            )
-          ],
-          1
+          "button",
+          {
+            staticClass: "btn",
+            attrs: { eventid: "5cdcb69a-0" },
+            on: { tap: _vm.logout }
+          },
+          [_vm._v("退出当前账号")]
         )
       ],
       1
