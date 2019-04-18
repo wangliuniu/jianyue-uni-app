@@ -91,7 +91,7 @@ module.exports = {
 					if(data[rule[i].name] == null || data[rule[i].name].length < 1){this.error = rule[i].errorMsg; return false;}
 				break;
 			}
-		}
+		 }
 		return true;
 	},
 	isNumber : function (checkVal){
