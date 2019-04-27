@@ -1,4 +1,5 @@
 <template>
+	
 	<view class="container">
 		<!-- 顶部头像和昵称区域，纵向排列 -->
 
@@ -6,7 +7,7 @@
 			<view class="avatar-box">
 				<view class="card" v-if="!storageData.login">
 					<image
-						src="../../static/flower.png"
+						src="../../static/icon_welcome.png"
 						class="flower"
 						v-if="!storageData.login"
 					></image>
@@ -31,11 +32,14 @@
 					class="avatar1"
 					v-if="!storageData.login"
 				></image>
-
+            <view class="pic" v-if="storageData.login">
+				
+				
+			</view>
 				<image
 					:src="storageData.avatar"
 					mode="scaleToFill"
-					class="avatar"
+					class="avatar3"
 					v-if="storageData.login"
 				></image>
 			</view>
@@ -132,8 +136,8 @@
 						</view>
 					</view>
 				</view>
-				<!-- 积分部分 -->
-				<view class="content" v-if="cateCurrentIndex === 3"><text>积分</text></view>
+				<!-- 粉丝部分 -->
+				<view class="content" v-if="cateCurrentIndex === 3"><text>粉丝</text></view>
 			</view>
 		</view>
 	</view>
@@ -156,7 +160,6 @@ export default {
 			scrollIndex: -1,
 			//正在删除的索引
 			deleteIndex: -1,
-
 			storageData: {
 				userId: 0,
 				nickname: '',
@@ -168,7 +171,7 @@ export default {
 				{ cateid: 0, name: '文章' },
 				{ cateid: 1, name: '关注' },
 				{ cateid: 2, name: '收藏' },
-				{ cateid: 3, name: '积分' }
+				{ cateid: 3, name: '粉丝' }
 			],
 			// 当前选择的分类
 			cateCurrentIndex: 0,
@@ -277,7 +280,6 @@ export default {
 			}
 			_self.scrollIndex = index;
 		},
-
 		tabChange: function(e) {
 			// 选中的索引
 			var index = e.currentTarget.dataset.index;
@@ -353,14 +355,25 @@ export default {
 .title {
 	font-size: 14pt;
 }
+.avatar3 {
+	width: 60px;
+	height: 60px;
+	border-radius: 50%;
+	margin-top: -30px;
+	border: white 3px solid;
+}
 .content {
 	margin-top: 20px;
 }
-
 .on {
 	margin-top: 30px;
 	color: #de533a;
 	font-size: 17px;
+}
+.pic{
+	background-color:#EBAA9C;
+	width: 100%;
+	height: 50px;
 }
 .avatar1 {
 	width: 100px;
@@ -371,8 +384,8 @@ export default {
 .flower {
 	width: 50px;
 	height: 50px;
+	margin-right:10px ;
 }
-
 .back {
 	font-size: 20px;
 	color: #b4b4b4;
@@ -405,8 +418,6 @@ export default {
 	width: 85%;
 	margin-left: 15px;
 }
-
-
 .article-list {
 	font-size: 17px;
 }
@@ -456,5 +467,4 @@ export default {
 	color: #ADADAD;
 	margin-right: 30px;
 }
-
 </style>

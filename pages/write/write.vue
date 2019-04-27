@@ -1,25 +1,35 @@
 <template>
-	<view class="container">
-		<view class="top">
-		<!-- 文章标题输入框，和title变量绑定 -->
-		<view class="head">
-		<input type="text" v-model="title" class="biaoti" placeholder="请输入标题" />
+	<view class="container1">
+		<view class="container-box">
+			<view class="top">
+			<!-- 文章标题输入框，和title变量绑定 -->
+			<view class="head">
+			<input type="text" v-model="title" class="biaoti" placeholder="请输入标题" />
+			</view>
+			<button class="green-btn" @tap="postArticle">发布</button>
+			
+			</view>
+			<!-- 选择图片的按钮，点击触发chooseImg方法 -->
+			
+			<!-- 文章内容输入的多行文本域，绑定content变量 -->
+			<textarea placeholder="请输入正文" v-model="content" class="content" />
+			<text class="yulan">效果预览</text>
+			<!-- 使用graceUI的富文本解析功能，来预览文章内容 -->
+			<view class="grace-text">
+					<rich-text :nodes="content" bindtap="tap"></rich-text>
+			</view>
 		</view>
-		<button class="green-btn" @tap="postArticle">发布</button>
-		
-		</view>
-		<!-- 选择图片的按钮，点击触发chooseImg方法 -->
-		
-		<!-- 文章内容输入的多行文本域，绑定content变量 -->
-		<textarea placeholder="请输入正文" v-model="content" class="content" />
-		<button class="add-btn" @tap="chooseImg"> +  图片</button>
-		<text class="yulan">效果预览</text>
-		<!-- 使用graceUI的富文本解析功能，来预览文章内容 -->
-		<view class="grace-text">
-				<rich-text :nodes="content" bindtap="tap"></rich-text>
-		</view>
-		
-	
+		<view class="botton-box">
+			<view class="botton-box2">
+			<image src="../../static/pic.png" class="tubiao" @tap="chooseImg"></image>
+		    <image src="../../static/A.png" class="tubiao"></image>
+			 <image src="../../static/B.png" class="tubiao"></image>
+			  <image src="../../static/C.png" class="tubiao"></image>
+			   <image src="../../static/D.png" class="tubiao"></image>
+			    <image src="../../static/E.png" class="tubiao"></image>
+				</view>
+			</view>
+	     </view>
 	</view>
 </template>
 
@@ -109,6 +119,10 @@
 </script>
 
 <style>
+	.container-box {
+		width: 94%;
+		margin: 0 auto;
+	}
 	.add-btn{
 	
 	height: 40px;
@@ -124,6 +138,7 @@
 	}
 	.yulan{
 		color: #DE533A;
+		font-size: 15px;
 	}
  .top{
 	 height: 40px;
@@ -157,5 +172,32 @@
 	 
  .content{
 	 font-size: 20px;
+ }
+ .botton-box {
+ 	position: fixed;
+ 	bottom: 0px;
+ 	width: 100%;
+ 	height: 35px;
+ 	background-color: white;
+ 	padding-top: 10px;
+	background-color: #F6F6F6;
+ }
+ .tubiao {
+ 	width: 25px;
+ 	height: 25px;
+	margin-left: 20px;
+ }
+ .picword{
+	 font-size: 15px;
+	 color: #B4B4B4;
+	 margin-left: 10px;
+ }
+
+ .botton-box2{
+	 width: 90%;
+	 margin:  0 auto;
+	 display: flex;
+	 align-items: center;
+	 justify-content: space-between;
  }
 </style>

@@ -4,7 +4,7 @@
 		{
 			"path": "pages/index/index",
 			"style": {
-				"navigationBarTitleText": "文章",
+				"navigationBarTitleText": "首页",
 				//允许下拉刷新
 				"enablePullDownRefresh": true
 			}
@@ -12,14 +12,15 @@
 		{
 			"path": "pages/message/message",
 			"style": {
-				"navigationBarTitleText": "消息",
-				"enablePullDownRefresh": true
+				"navigationBarTitleText": "消息"
+			
 			}
 		},
 		{
 			"path": "pages/my/my",
 			"style": {
 				"navigationBarTitleText": "我的"
+				
 			}
 		},
 		{
@@ -32,6 +33,12 @@
 			"path": "pages/signup/signup",
 			"style": {
 				"navigationBarTitleText": "注册"
+			}
+		},
+		{
+			"path": "pages/force/force",
+			"style": {
+				"navigationBarTitleText": "关注"
 			}
 		},
 		{
@@ -57,6 +64,11 @@
 			"style": {}
 		},
 		{
+			"path": "pages/force/addforce",
+			"style": {}
+			},
+			
+		{
 			"path": "pages/user_info/user-info",
 			"navigationBarTitleText": "个人资料"
 
@@ -68,13 +80,14 @@
 		// "navigationBarTitleText" : "简阅",
 		"navigationBarBackgroundColor": "#F8F8F8",
 		"backgroundColor": "#F8F8F8"
+		
 	},
 	"tabBar": {
 		"color": "#707070",
 		"selectedColor": "#DE533A",
 		"list": [{
 				"pagePath": "pages/index/index",
-				"text": "文章",
+				"text": "首页",
 				"iconPath": "static/nav1.png",
 				"selectedIconPath": "static/nav1-a.png"
 			},
@@ -83,6 +96,12 @@
 				"text": "消息",
 				"iconPath": "static/nav2.png",
 				"selectedIconPath": "static/nav2-a.png"
+			},
+			{
+				"pagePath": "pages/force/force",
+				"text": "关注",
+				"iconPath": "static/force.png",
+				"selectedIconPath": "static/force-active.png"
 			},
 			{
 				"pagePath": "pages/my/my",

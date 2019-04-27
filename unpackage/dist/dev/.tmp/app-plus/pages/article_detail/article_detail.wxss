@@ -1,6 +1,7 @@
 
-.container {
+.container1 {
 	padding-top: 20px;
+	padding-bottom: 50px;
 }
 .content {
 	margin-bottom: 10px;
@@ -131,6 +132,30 @@ green-btn follow-btn cancel{
 .green:after {
 	border: null;
 }
+.botton-box {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	height: 45px;
+	background-color: white;
+	padding-top: 10px;
+}
+.botton-box2{
+	width: 90%;
+	margin:  0 auto;
+	display: -webkit-box;
+	display: -webkit-flex;
+	display: -ms-flexbox;
+	display: flex;
+	-webkit-box-align: center;
+	-webkit-align-items: center;
+	    -ms-flex-align: center;
+	        align-items: center;
+	-webkit-box-pack: justify;
+	-webkit-justify-content: space-between;
+	    -ms-flex-pack: justify;
+	        justify-content: space-between;
+}
 .green1:after {
 	border: null;
 }
@@ -165,5 +190,13 @@ green-btn follow-btn cancel{
 	background: #de533a;
 	color: white;
 	border-color: #b4b4b4;
+}
+.container-box {
+	width: 94%;
+	margin: 0 auto;
+}
+.tubiao {
+	width: 20px;
+	height: 20px;
 }
 

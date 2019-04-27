@@ -1,44 +1,67 @@
 <template>
-	<view class="container">
-		<text class="article-title">{{ article.title }}</text>
-		<view class="article-info">
-			<image :src="article.avatar" class="article-avatar"></image>
-			<text class="article-writer">{{ article.nickname }}</text>
-			<text class="info-text">{{ article.createTime }}</text>
-			<!-- 登录用户和文章作者不是同一个人，就显示关注或取消关注按钮 -->
-			<button v-if="userId != article.uId && !followed" class="green" @tap="follow">
-				关注
-			</button>
-			<button v-if="userId != article.uId && followed" class="green1" @tap="cancelFollow">
-				取消
-			</button>
-		</view>
+	<view class="container1">
+		<view class="container-box">
+			<text class="article-title">{{ article.title }}</text>
+			<view class="article-info">
+				<image :src="article.avatar" class="article-avatar"></image>
+				<text class="article-writer">{{ article.nickname }}</text>
+				<text class="info-text">{{ article.createTime }}</text>
+				<!-- 登录用户和文章作者不是同一个人，就显示关注或取消关注按钮 -->
+				<button v-if="userId != article.uId && !followed" class="green" @tap="follow">
+					关注
+				</button>
+				<button v-if="userId != article.uId && followed" class="green1" @tap="cancelFollow">
+					取消
+				</button>
+			</view>
 
-		<view class="grace-text" style="margin-top: 10px;">
-			<rich-text :nodes="article.content" bindtap="tap"></rich-text>
+			<view class="grace-text" style="margin-top: 10px;">
+				<rich-text :nodes="article.content" bindtap="tap"></rich-text>
+			</view>
+			<button v-if="!liked" class="green" @tap="likeArticke">收藏</button>
+			<button v-if="liked" class="green1" @tap="cancelLike">取消</button>
+			<text class="info-text2">评论{{ comments.length }}</text>
+			<view class="comment-item" v-for="(comment, index) in comments" :key="index">
+				<view class="left"><image :src="comment.avatar" class="avatar small"></image></view>
+				<view class="right">
+					<text>{{ comment.nickname }}</text>
+					<text>{{ comment.content }}</text>
+					<view>
+						<text style="margin-right: 10px;">{{ comments.length - index }}楼</text>
+						<text class="time">{{ comment.commentTime }}</text>
+					</view>
+				</view>
+			</view>
+			<input
+				class="uni-input comment-box"
+				type="text"
+				placeholder="写下你的评论"
+				v-model="content"
+				required="required"
+			/>
+			<button class="green-btn" @tap="send">提交</button>
 		</view>
-		<button v-if="!liked" class="green" @tap="likeArticke">收藏</button>
-		<button v-if="liked" class="green1" @tap="cancelLike">取消</button>
-		<text class="info-text2">评论{{ comments.length }}</text>
-		<view class="comment-item" v-for="(comment, index) in comments" :key="index">
-			<view class="left"><image :src="comment.avatar" class="avatar small"></image></view>
-			<view class="right">
-				<text>{{ comment.nickname }}</text>
-				<text>{{ comment.content }}</text>
+		<view class="botton-box">
+			<view class="botton-box2">
 				<view>
-					<text style="margin-right: 10px;">{{ comments.length - index }}楼</text>
-					<text class="time">{{ comment.commentTime }}</text>
+				<image src="../../static/pinglun.png" class="tubiao"></image><br/>
+				<span class="word">评论{{comments.length}}</span>
+				</view>
+				<view>
+				<image src="../../static/zanshang.png" class="tubiao"></image><br/>
+				<span class="word">赞赏</span>
+				</view>
+				<view>
+				<image src="../../static/xihuan.png"  v-if="!active" @tap="changeActive"  class="tubiao"></image>
+				<image src="../../static/xihuan2.png" v-if="active" @tap="changeActive" class="tubiao"></image><br/>
+				<span class="word">喜欢</span>
+				</view>
+				<view>
+				<image src="../../static/fenxiang.png" class="tubiao"></image><br/>
+				<span class="word">分享</span>
 				</view>
 			</view>
 		</view>
-		<input
-			class="uni-input comment-box"
-			type="text"
-			placeholder="写下你的评论"
-			v-model="content"
-			required="required"
-		/>
-		<button class="green-btn" @tap="send">提交</button>
 	</view>
 </template>
 
@@ -59,7 +82,8 @@ export default {
 			content: '',
 			userId: uni.getStorageSync('login_key').userId,
 			followed: false,
-			liked:false
+			liked: false,
+			active:false
 		};
 	},
 	onLoad: function(option) {
@@ -72,9 +96,9 @@ export default {
 	onPullDownRefresh: function() {
 		this.getArticle();
 	},
-	methods: {
+	methods:{
 		likeArticke: function() {
-			var _this=this;
+			var _this = this;
 			uni.request({
 				url: this.apiServer + '/like/add',
 				method: 'POST',
@@ -85,8 +109,8 @@ export default {
 				},
 				success: res => {
 					uni.showToast({
-						title:'收藏成功'
-					})
+						title: '收藏成功'
+					});
 					this.liked = true;
 				}
 			});
@@ -125,9 +149,11 @@ export default {
 					_this.article.avatar = res.data.data.article.avatar;
 					_this.article.createTime = res.data.data.article.createTime;
 					_this.comments = res.data.data.comments;
-					_this.article.createTime=this.handleTime(_this.article.createTime);
-					for(var i=0;i<_this.comments.length;i++){
-						_this.comments[i].commentTime=this.handleTime(_this.comments[i].commentTime);
+					_this.article.createTime = this.handleTime(_this.article.createTime);
+					for (var i = 0; i < _this.comments.length; i++) {
+						_this.comments[i].commentTime = this.handleTime(
+							_this.comments[i].commentTime
+						);
 					}
 					if (res.data.data.followed === '已关注') {
 						_this.followed = true;
@@ -135,12 +161,15 @@ export default {
 					if (res.data.data.liked === '喜欢') {
 						_this.liked = true;
 					}
-
 				},
 				complete: function() {
 					uni.stopPullDownRefresh();
 				}
 			});
+		},
+			
+		changeActive:function(){
+			this.active=!this.active;
 		},
 
 		handleTime: function(date) {
@@ -154,7 +183,14 @@ export default {
 			return year + '-' + month + '-' + day + ' ' + hour + ':' + minutes + ':' + seconds;
 		},
 		send: function() {
-			console.log('评论人编号：' + this.userId + ',文章编号：' + this.article.aId + '，评论内容：' + this.content);
+			console.log(
+				'评论人编号：' +
+					this.userId +
+					',文章编号：' +
+					this.article.aId +
+					'，评论内容：' +
+					this.content
+			);
 			uni.request({
 				url: this.apiServer + '/comment/add',
 				method: 'POST',
@@ -175,7 +211,7 @@ export default {
 				}
 			});
 		},
-		follow:function(){
+		follow: function() {
 			uni.request({
 				url: this.apiServer + '/follow/add',
 				method: 'POST',
@@ -194,7 +230,7 @@ export default {
 				}
 			});
 		},
-		cancelFollow:function(){
+		cancelFollow: function() {
 			uni.request({
 				url: this.apiServer + '/follow/cancel',
 				method: 'POST',
@@ -218,8 +254,9 @@ export default {
 </script>
 
 <style>
-.container {
+.container1 {
 	padding-top: 20px;
+	padding-bottom: 50px;
 }
 .content {
 	margin-bottom: 10px;
@@ -312,6 +349,21 @@ green-btn follow-btn cancel{
 .green:after {
 	border: null;
 }
+.botton-box {
+	position: fixed;
+	bottom: 0px;
+	width: 100%;
+	height: 45px;
+	background-color: white;
+	padding-top: 10px;
+}
+.botton-box2{
+	width: 90%;
+	margin:  0 auto;
+	display: flex;
+	align-items: center;
+	justify-content: space-between;
+}
 .green1:after {
 	border: null;
 }
@@ -347,5 +399,13 @@ green-btn follow-btn cancel{
 	background: #de533a;
 	color: white;
 	border-color: #b4b4b4;
+}
+.container-box {
+	width: 94%;
+	margin: 0 auto;
+}
+.tubiao {
+	width: 20px;
+	height: 20px;
 }
 </style>

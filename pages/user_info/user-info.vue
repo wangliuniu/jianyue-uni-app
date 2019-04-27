@@ -1,15 +1,18 @@
 <template>
 	<view class="container">
+		<view class="list-border-space"></view>
+		<view class="list-space"><text>常规设置</text></view>
+		<view class="list-border-space"></view>
 		<view class="list">
-			<view class="list-item list-item-heigher">
-				<view class="left">头像</view>
-				<view class="right">
-					<image :src="avatar" class="avatar" @tap="showActionSheet"></image>
-				</view>
+				<view class="list-item avatar_card" @tap="showActionSheet">
+				<view class="info_left"><text>更改头像</text></view>
+				<view class="info_right"><image :src="avatar" class="avatar_info"></image></view>
 			</view>
-			<view class="list-item list-item-heigher">
-				<view class="left">昵称</view>
-				<view class="right">{{ nickname }}</view>
+			</view>
+			<view class="list-item">
+				<view class="info_left">更改昵称</view>
+				<view class="info_right">
+				<text>{{ nickname }}</text></view>
 			</view>
 			<view class="list-item list-item-heigher">
 				<view class="right1"><input type="text" v-model="newNickname" /></view>
@@ -17,6 +20,21 @@
 					<button @tap="uploadNickname" class="green-btn">确定</button>
 				</view>
 			</view>
+			<view class="list-item ">
+					<view class="info_left"><text>更改性別</text></view>
+					<view class="info_right"><text>女</text></view>
+				</view>
+				<view class="list-item ">
+					<view class="info_left"><text>更改生日</text></view>
+					<view class="info_right"><text>1999-3-18</text></view>
+				</view>
+				<view class="list-item ">
+					<view class="info_left"><text>更改主页</text></view>
+					<view class="info_right"><text></text></view>
+				</view>
+			</view>
+		
+         
 		</view>
 	</view>
 </template>
@@ -212,7 +230,7 @@ export default {
 }
 .right1{
 	flex: 1 1 30%;
-	font-size: 17px;
+	font-size: 15px;
 }
 .green-btn{
 	 
@@ -222,5 +240,45 @@ export default {
 	 color:white ;
 	 border-color:#B4B4B4;
 	 
+ }
+ .list-space {
+ 	color: #ebaa9c;
+ 	background-color: #fcfcfc;
+ 	width: 100%;
+ 	margin: 0 auto;
+ 	font-size: 30upx;
+ 	padding-top: 40upx;
+ 	padding-bottom: 25upx;
+ }
+ .uni-list-item {
+ 	min-height: 55px;
+ }
+ .bangding {
+ 	color: #b1b1b1;
+ }
+ .avatar_info {
+ 	width: 32px;
+ 	height: 32px;
+ 	border-radius: 50%;
+ }
+ .savebtn {
+ 	width: 100%;
+ }
+ .info_right {
+ 	text-align: right;
+ 	flex: 0 0 50%;
+ 	color: #6f6f6f;
+ }
+ .info_left {
+ 	flex: 0 0 50%;
+ }
+ .bottom-item {
+ 	border-bottom: 0px;
+ }
+ .uni-list-item {
+ 	min-height: 55px;
+ }
+ .bangding {
+ 	color: #b1b1b1;
  }
 </style>

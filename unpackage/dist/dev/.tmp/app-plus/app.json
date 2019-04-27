@@ -5,11 +5,13 @@
     "pages/my/my",
     "pages/password/password",
     "pages/signup/signup",
+    "pages/force/force",
     "pages/article_detail/article_detail",
     "pages/signin/signin",
     "pages/write/write",
     "pages/info/info",
     "pages/setting/setting",
+    "pages/force/addforce",
     "pages/user_info/user-info"
   ],
   "subPackages": [],
@@ -25,7 +27,7 @@
     "list": [
       {
         "pagePath": "pages/index/index",
-        "text": "文章",
+        "text": "首页",
         "iconPath": "static/nav1.png",
         "selectedIconPath": "static/nav1-a.png"
       },
@@ -34,6 +36,12 @@
         "text": "消息",
         "iconPath": "static/nav2.png",
         "selectedIconPath": "static/nav2-a.png"
+      },
+      {
+        "pagePath": "pages/force/force",
+        "text": "关注",
+        "iconPath": "static/force.png",
+        "selectedIconPath": "static/force-active.png"
       },
       {
         "pagePath": "pages/my/my",

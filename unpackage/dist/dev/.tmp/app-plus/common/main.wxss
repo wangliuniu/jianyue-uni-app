@@ -478,4 +478,3 @@ to {-webkit-transform:rotateY(360deg);transform:rotateY(360deg);}}
 .grace-card-view .footer view:last-child{border:none;}
 .grace-card-view .footer .grace-iconfont:before{padding-right:8px;}
 
-

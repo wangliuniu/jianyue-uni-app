@@ -1,15 +1,11 @@
 <template>
 	<view class="container">
-		<button @tap="showBanner">签到</button>
-			<view v-if="show" class="qiandao-box">
-				<view class="qiandao">
-					<button type="primary" @tap="closeBanner">签到</button>
-				</view>
-			</view>
-		 
-		 
+		<view class="topcard">
+		<input type="text" class="index-box" v-model="searchString" placeholder="请输入关键词搜索" />
+		<image src="../../static/search.png" class="search"></image>
+		</view>
 		<view class="article-box">
-			<view class="article" v-for="(article, index) in articles" :key="index">
+			<view class="article" v-for="(article, index) in filteredArticles" :key="index">
 				<text class="article-title" @tap="gotoDetail(article.id)">{{ article.title }}</text>
 				<!-- 大于等于三张图片的显示方式 -->
 				<view class="" v-if="article.imgs.length >= 3">
@@ -46,25 +42,24 @@
 					<view class="end"></view>
 				</view>
 
-				<hr/>
+				<hr />
 			</view>
 		</view>
-	<button class="circle-btn" @click="gotoWrite"><text class="icon-text">+</text></button> 
-	</view> 
+		<button class="circle-btn" @click="gotoWrite"><text class="icon-text">+</text></button>
+	</view>
 </template>
 
 <script>
-	import graceMaskView from "../../graceUI/components/graceMaskView.vue";
+import graceMaskView from '../../graceUI/components/graceMaskView.vue';
 export default {
-	
 	components: {
-			graceMaskView
-		},
+		graceMaskView
+	},
 	data() {
 		return {
 			articles: [],
-			show:false
-
+			show: false,
+			searchString: ''
 		};
 	},
 	onLoad: function() {
@@ -75,32 +70,50 @@ export default {
 		this.getArticles();
 	},
 
+	computed: {
+		// 计算函数，匹配搜索
+		filteredArticles: function() {
+			var articles_array = this.articles,
+				searchString = this.searchString;
+			//搜索关键词为空,则返回原始数据集
+			if (!searchString) {
+				return articles_array;
+			}
+			//搜索关键词去除无用空格,转换为小写
+			searchString = searchString.trim().toLowerCase();
+			//过滤数组中每个元素,如果
+			articles_array = articles_array.filter(function(item) {
+				if (item.title.toLowerCase().indexOf(searchString) !== -1) {
+					return item;
+				}
+			});
+			// 返回转化后的数组
+			return articles_array;
+		}
+	},
 	methods: {
-			showBanner : function(){
-				this.show = true;
-			},
-			closeBanner : function(){
-				this.show = false;
-			},
+		showBanner: function() {
+			this.show = true;
+		},
+		closeBanner: function() {
+			this.show = false;
+		},
 
-		
-		    open:function() {
-                var oBtn = document.getElementById("btn1");
-                oBtn.style.display = "block";
+		open: function() {
+			var oBtn = document.getElementById('btn1');
+			oBtn.style.display = 'block';
 
-                var oBg = document.getElementById("bg");
-                oBg.style.display = "block";
-            },
+			var oBg = document.getElementById('bg');
+			oBg.style.display = 'block';
+		},
 
-            close:function() {
-                var oBn = document.getElementById("cont");
-                s.style.display = "none";
+		close: function() {
+			var oBn = document.getElementById('cont');
+			s.style.display = 'none';
 
-                var oBg = document.getElementById("close");
-                l.style.display = "none";
-            },
-
-
+			var oBg = document.getElementById('close');
+			l.style.display = 'none';
+		},
 
 		gotoWrite: function() {
 			if (uni.getStorageSync('login_key').login === true) {
@@ -111,8 +124,8 @@ export default {
 				uni.showModal({
 					title: '未登录',
 					content: '请先登录',
-					confirmText:'立即登陆',
-					cancelText:'稍后登陆',
+					confirmText: '立即登陆',
+					cancelText: '稍后登陆',
 					success: function(res) {
 						if (res.confirm) {
 							uni.navigateTo({
@@ -246,14 +259,14 @@ export default {
 	height: 100vh;
 	display: flex;
 	justify-content: center;
-	background-color: #E9E9E9;
+	background-color: #e9e9e9;
 }
 .qiandao {
 	width: 100%;
 	height: 100vh;
 	display: flex;
 	align-items: center;
-	background-color: #FFFFFF;
+	background-color: #ffffff;
 	justify-content: center;
 }
 .circle-btn {
@@ -275,10 +288,9 @@ export default {
 	align-items: center;
 }
 
-
-.btn1{
+.btn1 {
 	display: block;
-	margin:30px auto;
+	margin: 30px auto;
 	width: 200px;
 	height: 62px;
 	line-height: 62px;
@@ -287,41 +299,58 @@ export default {
 	font-size: 24px;
 	background: orangered;
 	border-radius: 30px;
-	border:none;
+	border: none;
+}
+.bg {
+	display: none;
+	position: absolute;
+	width: 100%;
+	height: 100%;
+	top: 0;
+	left: 0;
+	background: rgba(0, 0, 0, 0.5);
+	z-index: 100;
+}
+.rec {
+	display: block;
+	background: url(../../static/1.jpg) no-repeat -170px -108px;
+	width: 410px;
+	height: 620px;
+}
+.close {
+	position: absolute;
+	right: -38px;
+	top: 0px;
+	background: url(../../static/1.jpg) no-repeat -528upx -69px;
+	width: 38px;
+	height: 38px;
+	cursor: pointer;
+}
+.cont {
+	display: none;
+	position: absolute;
+	top: 6%;
+	left: 30%;
+	z-index: 101;
+}
+.index-box{
+	padding-left: 20px;
+
+	border-radius: 20px;
+	height: 35px;
+	border: #ea6f5a  1upx solid;
+	width: 80%;
+	margin-top: 10px;
 	
- }
-  .bg{
-	  display: none;
-	  position: absolute;
-	  width: 100%;
-	  height: 100%;
-	  top:0;
-	  left: 0;
-	  background: rgba(0,0,0,0.5);
-	  z-index: 100;
-  }
-  .rec{
-	  display: block;
-	  background: url(../../static/1.jpg) no-repeat -170px -108px;
-	  width: 410px;
-	  height: 620px;
-  }
-  .close{
-	 position: absolute;
-	 right: -38px;
-	 top:0px;
-	 background: url(../../static/1.jpg) no-repeat -528upx -69px;
-	 width: 38px;
-	 height: 38px;
-	 cursor: pointer;
-  }
-  .cont{
-	  display: none;
-	  position: absolute;
-	  top:6%;
-	  left:30%;
-	  z-index: 101;
-  }
- 
- 
+}
+.search{
+	width: 20px;
+	height: 20px;	
+    margin-top: 15px;
+	margin-left: 10px;
+}
+.topcard{
+	display: flex;
+
+}
 </style>
